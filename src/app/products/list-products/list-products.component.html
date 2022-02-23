@@ -1,0 +1,31 @@
+<div class="container">
+  <h3>Listagem de Produtos</h3>
+
+  <table *ngIf="responseProducts" class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th class="col-1 text-center" scope="col">#</th>
+        <th scope="col">Nome</th>
+        <th class="col-2 text-center" scope="col">Ações</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let product of responseProducts">
+      <tr>
+        <td class="col-1 text-center">
+          {{ product.id }}
+        </td>
+        <td>
+          {{ product.name }}
+        </td>
+        <td class="text-center">
+          <a routerLink="/products/update/{{ product.id }}">
+            <button class="btn btn-warning btn-sm">Editar</button>
+          </a>
+          <a routerLink="/products/delete/{{ product.id }}">
+            <button class="btn btn-danger btn-sm ml-2">Remover</button>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
