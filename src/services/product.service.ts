@@ -8,16 +8,21 @@ import { Product, ProductsResponse } from 'src/models/product.model';
 })
 export class ProductService {
 
-  private url = "http://localhost:8080/products";
+  private url = "/api/products";
 
   constructor(private http: HttpClient) { }
 
-  getProducts(): Observable<ProductsResponse> {
+  listProducts(): Observable<ProductsResponse> {
     return this.http.get<ProductsResponse>(this.url);
   }
 
   getProduct(id: number): Observable<ProductsResponse> {
     const _url = `${this.url}/${id}`;
+    return this.http.get<ProductsResponse>(_url);
+  }
+
+  searchProduct(query: string): Observable<ProductsResponse> {
+    const _url = `${this.url}/search?name=${query}`;
     return this.http.get<ProductsResponse>(_url);
   }
 
@@ -29,11 +34,8 @@ export class ProductService {
     return this.http.put<ProductsResponse>(this.url, request);
   }
 
-  deleteProduct(id: number, request: Product): Observable<any> {
-    // return this.http.delete<ProductsResponse>(this.url);       --> beauty way
-
-    // delete from here after Daniel fix on backend (backend is requiring body and URL parameter for delete requests)
+  deleteProduct(id: number): Observable<any> {
     const _url = `${this.url}/${id}`;
-    return this.http.request("DELETE", _url, { body: request })
+    return this.http.delete(_url);
   }
 }

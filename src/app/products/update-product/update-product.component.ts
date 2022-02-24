@@ -13,7 +13,7 @@ import { ProductService } from 'src/services/product.service';
 export class UpdateProductComponent implements OnInit {
 
   id: number;
-  request: Product;
+  product: Product;
   response: ProductsResponse;
 
   constructor(private productService: ProductService, private route: ActivatedRoute) { }
@@ -21,16 +21,16 @@ export class UpdateProductComponent implements OnInit {
   ngOnInit(): void {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
     this.productService.getProduct(this.id).subscribe(
-      response => this.request = {
-          id: response.result[0].id,
-          name: response.result[0].name
-        }
+      res => {
+        this.response = res;
+        this.product = res.result[0];
+      }
     );
   }
 
   Update() {
-    this.productService.updateProduct(this.request).subscribe(
-      _response => this.response = _response
+    this.productService.updateProduct(this.product).subscribe(
+      res => this.response = res
     );
   }
 

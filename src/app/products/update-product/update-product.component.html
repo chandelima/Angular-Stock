@@ -1,26 +1,16 @@
-<!-- <h4>Alterar Produto:</h4>
-<form *ngIf="request">
-  <p>Id: {{request.id}}</p>
-  <label for="">Nome: </label>
-  <input type="text" placeholder="Insira o nome do produto" name="name" [(ngModel)]="request.name">
-  <br>
-  <br>
-  <button (click)="Update()">Alterar</button>
-</form>
-<br><br>
-<div *ngIf="response && response.status == 200">
-  <p>Produto alterado com sucesso!<p>
-</div> -->
-
-
 <div class="container">
   <div
-    *ngIf="response && response.status == 200"
+    *ngIf="response && response.message == 'Product updated successfully'"
     class="alert alert-primary text-center col-4 mb-3"
-    role="alert">
-      Produto alterado com sucesso!
+    role="alert"
+  >
+    Produto alterado com sucesso!
   </div>
-  <div *ngIf="request" class="card w-75" style="width: 24rem">
+  <div
+    *ngIf="response"
+    class="card w-75"
+    style="width: 24rem"
+  >
     <div class="card-header">
       <h5 class="card-title">Alterar Produto</h5>
       <p class="card-text">
@@ -32,17 +22,32 @@
         <div class="form-row">
           <div class="form-group col-md-2">
             <label for="id">ID:</label>
-            <input type="text" class="form-control" id="id" name="id" [(ngModel)]="request.id" readonly>
+            <input
+              type="text"
+              class="form-control"
+              id="id"
+              name="id"
+              [(ngModel)]="product.id"
+              readonly
+            />
           </div>
           <div class="form-group col-md-10">
             <label for="name">Nome:</label>
-            <input type="text" class="form-control" id="name" name="name" [(ngModel)]="request.name">
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              name="name"
+              [(ngModel)]="product.name"
+            />
           </div>
         </div>
       </form>
     </div>
     <div class="card-footer">
-      <button class="btn btn-success" (click)="Update()">Alterar</button>
+      <button class="btn btn-success" (click)="Update()">
+        Alterar
+      </button>
     </div>
   </div>
 </div>

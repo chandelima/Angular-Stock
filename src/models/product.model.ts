@@ -4,7 +4,6 @@ export interface Product {
 }
 
 export interface ProductsResponse {
-  status: number;
   message: string;
   result: Product[];
 }

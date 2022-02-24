@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from 'src/models/product.model';
+import { Product, ProductsResponse } from 'src/models/product.model';
 import { ProductService } from 'src/services/product.service';
 
 @Component({
@@ -9,15 +9,37 @@ import { ProductService } from 'src/services/product.service';
 })
 export class ListProductsComponent implements OnInit {
 
-  responseProducts: Product[];
+  response: ProductsResponse;
+  searchQuery: string;
 
-  constructor(private produtService: ProductService) { }
+  constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
-    this.produtService.getProducts()
-      .subscribe(
-        response => this.responseProducts = response.result
-      );
+    this.getProducts();
   }
 
+  getProducts() {
+    this.productService.listProducts()
+    .subscribe(
+      res => this.response = res
+    );
+  }
+
+  public searchProduct(){
+    if(this.searchQuery) {
+      this.productService.searchProduct(this.searchQuery)
+      .subscribe(
+        res => {
+          this.response = res
+        },
+        err => {
+          if(err.status == 404) {
+            this.response.result = [];
+          }
+        }
+      );
+    } else {
+      this.getProducts()
+    }
+  }
 }

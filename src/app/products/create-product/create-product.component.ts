@@ -9,9 +9,11 @@ import { ProductService } from 'src/services/product.service';
 })
 export class CreateProductComponent implements OnInit {
 
-  request: Product = {
+  initialProduct: Product = {
+    id: undefined,
     name: ''
   };
+  product: Product = this.initialProduct;
   response: ProductsResponse;
 
   constructor(private productService: ProductService) { }
@@ -20,8 +22,12 @@ export class CreateProductComponent implements OnInit {
   }
 
   Save(){
-    this.productService.createProduct(this.request).subscribe(
-      res => this.response = res
+    this.productService.createProduct(this.product).subscribe(
+      res => {
+        this.response = res;
+        this.product = this.initialProduct;
+      }
+
     );
   }
 

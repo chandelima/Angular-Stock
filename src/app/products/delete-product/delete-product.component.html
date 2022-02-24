@@ -1,11 +1,16 @@
 <div class="container">
   <div
-    *ngIf="response && response.status == 200"
+    *ngIf="response && response.message == 'Product removed successfully'"
     class="alert alert-primary text-center col-4 mb-3"
-    role="alert">
+    role="alert"
+  >
       Produto deletado com sucesso!
   </div>
-  <div *ngIf="request" class="card w-75" style="width: 24rem">
+  <div
+    *ngIf="response"
+    class="card w-75"
+    style="width: 24rem"
+  >
     <div class="card-header">
       <h5 class="card-title">Remover Produto</h5>
       <p class="card-text">
@@ -15,15 +20,17 @@
     <div class="card-body">
       <ul class="list-group list-group-flush">
         <li class="list-group-item">
-          <strong>Id: </strong> {{ request.id }}
+          <strong>Id: </strong> {{product.id }}
         </li>
         <li class="list-group-item">
-          <strong>Nome: </strong> {{ request.name }}
+          <strong>Nome: </strong> {{product.name }}
         </li>
       </ul>
     </div>
     <div class="card-footer">
-      <button class="btn btn-danger" (click)="Delete()">Remover</button>
+      <button class="btn btn-danger" (click)="Delete()">
+        Remover
+      </button>
     </div>
   </div>
 </div>

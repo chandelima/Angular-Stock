@@ -1,11 +1,12 @@
 <div class="container">
   <div
-    *ngIf="response && response.status == 200"
+    *ngIf="response && response.message == 'Product saved successfully'"
     class="alert alert-primary text-center col-4 mb-3"
-    role="alert">
+    role="alert"
+  >
       Produto cadastrado com sucesso!
   </div>
-  <div *ngIf="request" class="card w-75" style="width: 24rem">
+  <div *ngIf="product" class="card w-75" style="width: 24rem">
     <div class="card-header">
       <h5 class="card-title">Cadastrar Produto</h5>
       <p class="card-text">
@@ -16,7 +17,7 @@
       <form>
         <div class="form-group">
           <label for="name">Nome:</label>
-          <input type="email" class="form-control" id="name" name="name" [(ngModel)]="request.name">
+          <input type="email" class="form-control" id="name" name="name" [(ngModel)]="product.name">
         </div>
       </form>
     </div>
